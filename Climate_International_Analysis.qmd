@@ -78,6 +78,13 @@ climateData_HUN<- climateData_HUN %>%
 climateData_CL<- climateData_CL %>% 
   filter(age < 26)
 
+climateData_HUN <- climateData_HUN %>% rename_at('municipiality', ~'municipality')
+
+climateData_CL <- climateData_CL %>% rename_at('municipiality', ~'municipality')
+
+climateData_AUS_2020 <- climateData_AUS_2020 %>% rename_at('municipiality', ~'municipality')
+
+climateData_AUS_2022 <- climateData_AUS_2022 %>% rename_at('municipiality', ~'municipality')
 # Score CCAS for Chilean sample (scores were recorded as integers in the sheet)
 # To do: Tidy this up into a function
 
@@ -316,11 +323,11 @@ val_lab(climateData_AUS_2022$education) = num_lab("
              6 Undergraduate degree
              7 Postgraduate degree") 
 
-val_lab(climateData_AUS_2022$municipiality) = num_lab("
+val_lab(climateData_AUS_2022$municipality) = num_lab("
              1 Metropolitan
              2 Regional/rural  ")  # Add value labels 
-myVars <- c("age", "dass_mean" , "pds_mean", "brs_mean", "ccas_mean", "gender", "education", "municipiality" )
-catVars <- c("gender", "education", "municipiality")
+myVars <- c("age", "dass_mean" , "pds_mean", "brs_mean", "ccas_mean", "gender", "education", "municipality" )
+catVars <- c("gender", "education", "municipality")
 
 
 tab2 <- print(CreateTableOne(vars = myVars, data = climateData_AUS_2022, factorVars = catVars, ), showAllLevels = TRUE)
@@ -336,4 +343,70 @@ tab2 %>%
   kable_styling()
 ```
 
+
+
+```{r calculate descriptive stats HUN, echo = FALSE, include = FALSE}
+
+
+val_lab(climateData_HUN$gender) = num_lab("
+             1 Male
+             2 Female ")  # Add value labels 
+ 
+
+
+myVars <- c("age", "dass_mean" , "pds_mean", "nrs_mean", "ccas_mean", "who_sum", "heas_mean", "brs_mean", "gender", "occupation", "municipality" )
+catVars <- c("gender", "occupation", "municipality")
+
+
+tab3 <- print(CreateTableOne(vars = myVars, data = climateData_HUN, factorVars = catVars, ), showAllLevels = TRUE)
+
+```
+
+### Basic demographics and key variables - Hungarian dataset
+
+```{r table three, echo=FALSE}
+
+tab3 %>%
+  kable(caption = "Descriptive statistics for key variables, Hungarian dataset") %>%
+  kable_styling()
+```
+
+
+
+```{r calculate descriptive stats CL, echo = FALSE, include = FALSE}
+myVars <- c("age", "dass_mean" , "pds_mean", "nrs_mean", "ccas_mean", "who_sum", "heas_mean", "brs_mean", "cns_mean", "gender", "occupation", "municipality" )
+catVars <- c("gender", "occupation", "municipality")
+
+climateData_CL$gender <- unlist(climateData_CL$gender, use.names = FALSE)
+
+val_lab(climateData_CL$gender) = num_lab("
+             1 Male
+             2 Female 
+             3 Other
+             4 Prefer not to say")  # Add value labels 
+
+tab4 <- print(CreateTableOne(vars = myVars, data = climateData_CL, factorVars = catVars, ), showAllLevels = TRUE)
+
+```
+
+### Basic demographics and key variables - Chilean dataset
+
+```{r table four, echo=FALSE}
+
+tab4 %>%
+  kable(caption = "Descriptive statistics for key variables, Chilean dataset") %>%
+  kable_styling()
+```
+
+## Brief commentary on the descriptives
+
+The Municipalities data for Chile needs cleaning up. 
+
+From the descriptives, we can see that the Chilean sample is younger, on average, and has more male participants. 
+
+It looks as if there are differences between countries on the DASS and CCAS - we will test that later. 
+
+The crossover between countries with which scales have been collected is quite variable. 
+
+## Scale reliability
 
