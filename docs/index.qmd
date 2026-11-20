@@ -527,7 +527,6 @@ TBA
 
 ### CCAS mean
 
-There were significant differences between the countries on mean climate change anxiety scores, controlling for age. Post hoc comparisons show that both Australian and Chilean samples had higher climate change anxiety than the Hungarian sample, after controlling for age. 
 
 ```{r CCAS differences plot, echo=FALSE}
 ccas_mean_plot <- ggplot(all_data, aes(x = country, y = ccas_mean, fill = 	country)) +
