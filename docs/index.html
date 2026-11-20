@@ -164,24 +164,19 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">34 ( 4.6)</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">municipality (%)</td>
-<td style="text-align: left;">Inner Regional Australia</td>
-<td style="text-align: left;">246 (33.3)</td>
+<td style="text-align: left;">municipality_recoded (%)</td>
+<td style="text-align: left;">Rural</td>
+<td style="text-align: left;">67 ( 9.1)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"></td>
-<td style="text-align: left;">Major Cities of Australia</td>
-<td style="text-align: left;">425 (57.6)</td>
+<td style="text-align: left;">Semi-urban</td>
+<td style="text-align: left;">246 (33.3)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"></td>
-<td style="text-align: left;">Outer Regional Australia</td>
-<td style="text-align: left;">61 ( 8.3)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: left;">Remote Australia</td>
-<td style="text-align: left;">6 ( 0.8)</td>
+<td style="text-align: left;">Urban</td>
+<td style="text-align: left;">425 (57.6)</td>
 </tr>
 </tbody>
 </table>
@@ -278,14 +273,14 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">20 ( 2.3)</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">municipality (%)</td>
-<td style="text-align: left;">Metropolitan</td>
-<td style="text-align: left;">469 (53.5)</td>
+<td style="text-align: left;">municipality_recoded (%)</td>
+<td style="text-align: left;">Semi-urban</td>
+<td style="text-align: left;">408 (46.5)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"></td>
-<td style="text-align: left;">Regional/rural</td>
-<td style="text-align: left;">408 (46.5)</td>
+<td style="text-align: left;">Urban</td>
+<td style="text-align: left;">469 (53.5)</td>
 </tr>
 </tbody>
 </table>
@@ -417,44 +412,19 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">64 ( 6.1)</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">municipality (%)</td>
-<td style="text-align: left;">capital</td>
-<td style="text-align: left;">154 (16.7)</td>
+<td style="text-align: left;">municipality_recoded (%)</td>
+<td style="text-align: left;">Rural</td>
+<td style="text-align: left;">33 ( 3.6)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"></td>
-<td style="text-align: left;">city</td>
-<td style="text-align: left;">325 (35.2)</td>
+<td style="text-align: left;">Semi-urban</td>
+<td style="text-align: left;">411 (44.5)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"></td>
-<td style="text-align: left;">municipality</td>
-<td style="text-align: left;">122 (13.2)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;">other</td>
-<td style="text-align: left;">7 ( 0.8)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: left;">ranch</td>
-<td style="text-align: left;">7 ( 0.8)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;">small municipality</td>
-<td style="text-align: left;">19 ( 2.1)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: left;">town</td>
-<td style="text-align: left;">241 (26.1)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;">village</td>
-<td style="text-align: left;">48 ( 5.2)</td>
+<td style="text-align: left;">Urban</td>
+<td style="text-align: left;">479 (51.9)</td>
 </tr>
 </tbody>
 </table>
@@ -780,11 +750,107 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="brief-commentary-on-the-descriptives">Brief commentary on the descriptives</h2>
 <p>The Municipalities data for Chile needs cleaning up.</p>
 <p>From the descriptives, we can see that the Chilean sample is younger, on average, and has more male participants.</p>
-<p>It looks as if there are differences between countries on the DASS and CCAS - we will test that later.</p>
+<p>It looks as if there are differences between countries on the CCAS - we will test that later. It also seems as if the Australian sample has somewhat lower scores on the Family Affluence Scale. The AUS2022 sample has participants divided into Metro and Rural/Regional instead of 3 categories, but I think the original dataset has more detail. There are also some differences in education and municipality (Chilean sample still needs to be recoded).</p>
 <p>The crossover between countries with which scales have been collected is quite variable.</p>
 </section>
 <section id="scale-reliability" class="level2">
 <h2 class="anchored" data-anchor-id="scale-reliability">Scale reliability</h2>
+<p>TBA</p>
+</section>
+<section id="differences-between-countries" class="level2">
+<h2 class="anchored" data-anchor-id="differences-between-countries">Differences between countries</h2>
+<section id="ccas-mean" class="level3">
+<h3 class="anchored" data-anchor-id="ccas-mean">CCAS mean</h3>
+<p>There were significant differences between the countries on mean climate change anxiety scores, controlling for age. Post hoc comparisons show that both Australian and Chilean samples had higher climate change anxiety than the Hungarian sample, after controlling for age.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/CCAS%20differences%20plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small">
+<caption>ANOVA table for CCAS mean differences between countries, controlling for age</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">conf.int</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">statistic</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">df</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">df.residual</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Country</td>
+<td style="text-align: left;">.055</td>
+<td style="text-align: left;">[.041, .071]</td>
+<td style="text-align: left;">67.97</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">2314</td>
+<td style="text-align: left;">&lt; .001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Age c</td>
+<td style="text-align: left;">.010</td>
+<td style="text-align: left;">[.005, .018]</td>
+<td style="text-align: left;">23.90</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">2314</td>
+<td style="text-align: left;">&lt; .001</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small">
+<caption>Estimated marginal means contrast table for CCAS mean differences between countries, controlling for age. Tukey's method is used for multiple comparisons.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">contrast</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">SE</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">df</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">t.ratio</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">australia_22 - chile</td>
+<td style="text-align: right;">0.0640255</td>
+<td style="text-align: right;">0.0361757</td>
+<td style="text-align: right;">2314</td>
+<td style="text-align: right;">1.769846</td>
+<td style="text-align: right;">0.180015</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">australia_22 - hungary</td>
+<td style="text-align: right;">0.3072014</td>
+<td style="text-align: right;">0.0274905</td>
+<td style="text-align: right;">2314</td>
+<td style="text-align: right;">11.174835</td>
+<td style="text-align: right;">0.000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">chile - hungary</td>
+<td style="text-align: right;">0.2431759</td>
+<td style="text-align: right;">0.0348457</td>
+<td style="text-align: right;">2314</td>
+<td style="text-align: right;">6.978650</td>
+<td style="text-align: right;">0.000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
 </section>
 
 </main>
