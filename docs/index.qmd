@@ -25,7 +25,7 @@ library(emmeans)
 library(kableExtra)
 library(tableone)
 library(expss)
-
+library(papaja)
 knitr::opts_chunk$set(
   tidy=FALSE,     # display code as typed
   size="small")   # slightly smaller font for code
@@ -72,6 +72,14 @@ climateData_CL <- climateData_CL %>%
 
 climateData_CL <- climateData_CL %>%
   mutate(across(dass_mean:dass_stress, ~  . *.8)) # correct DASS scoring 
+
+climateData_HUN <- climateData_HUN %>% rename_at('municipiality', ~'municipality')
+
+climateData_CL <- climateData_CL %>% rename_at('municipiality', ~'municipality')
+
+climateData_AUS_2020 <- climateData_AUS_2020 %>% rename_at('municipiality', ~'municipality')
+
+climateData_AUS_2022 <- climateData_AUS_2022 %>% rename_at('municipiality', ~'municipality')
 
 # The HEAS was administered in Chile on a 0–3 scale, following the original questionnaire and the Spanish validation.
 # In Hungary, the same items were administered on a 1–4 scale.
@@ -140,6 +148,37 @@ climateData_AUS_2022 <- climateData_AUS_2022 %>%
  
   ))
 
+## Recode municipality data
+
+climateData_AUS_2020 <- climateData_AUS_2020 %>%
+  mutate(municipality_recoded = case_when(
+    municipality== "Major Cities of Australia" ~ "Urban",
+    municipality== "Inner Regional Australia" ~ "Semi-urban",
+    municipality==  "Outer Regional Australia" ~"Rural" ,
+    municipality==  "Remote Australia" ~"Rural"
+ 
+  ))
+
+climateData_AUS_2022 <- climateData_AUS_2022 %>%
+  mutate(municipality_recoded = case_when(
+    municipality== 1 ~ "Urban",
+    municipality== 2 ~ "Semi-urban"
+ 
+  ))
+
+climateData_HUN<- climateData_HUN %>%
+  mutate(municipality_recoded = case_when(
+    municipality== "city" ~ "Urban",
+    municipality== "capital" ~ "Urban",
+    municipality==  "town" ~"Semi-urban" ,
+    municipality==  "municipality" ~"Semi-urban" ,
+    municipality==  "village" ~"Semi-urban" ,
+    municipality==  "small municipality" ~"Rural",
+    municipality==  "ranch" ~"Rural" ,
+    municipality==  "other" ~"Rural"
+ 
+  ))
+
 ```
 
 ```{r wrangle data, echo = FALSE}
@@ -151,13 +190,7 @@ climateData_HUN<- climateData_HUN %>%
 climateData_CL<- climateData_CL %>% 
   filter(age < 26)
 
-climateData_HUN <- climateData_HUN %>% rename_at('municipiality', ~'municipality')
 
-climateData_CL <- climateData_CL %>% rename_at('municipiality', ~'municipality')
-
-climateData_AUS_2020 <- climateData_AUS_2020 %>% rename_at('municipiality', ~'municipality')
-
-climateData_AUS_2022 <- climateData_AUS_2022 %>% rename_at('municipiality', ~'municipality')
 # Score CCAS for Chilean sample (scores were recorded as integers in the sheet)
 # To do: Tidy this up into a function
 
@@ -357,16 +390,16 @@ val_lab(climateData_AUS_2020$gender) = num_lab("
              2 Female   
              3 Other    
              4 Prefer not to say")  # Add value labels 
-val_lab(climateData_AUS_2020$education) = num_lab("
-             1 Year 10 or less
-             2 Year 11
-             3 Year 12
-             4 College certificate or diploma
-             5 Trade qualification/apprenticeship
-             6 Undergraduate degree
-             7 Postgraduate degree") 
-myVars <- c("age", "dass_mean" , "pds_mean", "nrs_mean", "gender", "education_recoded", "municipality" )
-catVars <- c("gender", "education_recoded", "municipality")
+#val_lab(climateData_AUS_2020$education) = num_lab("
+ #            1 Year 10 or less
+ #            2 Year 11
+ #            3 Year 12
+  #           4 College certificate or diploma
+  #           5 Trade qualification/apprenticeship
+  #           6 Undergraduate degree
+   #          7 Postgraduate degree") 
+myVars <- c("age", "dass_mean" , "pds_mean", "nrs_mean", "gender", "education_recoded", "municipality_recoded" )
+catVars <- c("gender", "education_recoded", "municipality_recoded")
 
 
 tab1 <- print(CreateTableOne(vars = myVars, data = climateData_AUS_2020, factorVars = catVars, ), showAllLevels = TRUE)
@@ -391,20 +424,21 @@ val_lab(climateData_AUS_2022$gender) = num_lab("
              2 Female   
              3 Other    
              4 Prefer not to say")  # Add value labels 
-val_lab(climateData_AUS_2022$education) = num_lab("
-             1 Year 10 or less
-             2 Year 11
-             3 Year 12
-             4 College certificate or diploma
-             5 Trade qualification/apprenticeship
-             6 Undergraduate degree
-             7 Postgraduate degree") 
+#val_lab(climateData_AUS_2022$education) = num_lab("
+   #          1 Year 10 or less
+    #         2 Year 11
+     #        3 Year 12
+     #        4 College certificate or diploma
+      #       5 Trade qualification/apprenticeship
+      #       6 Undergraduate degree
+      #       7 Postgraduate degree") 
 
-val_lab(climateData_AUS_2022$municipality) = num_lab("
-             1 Metropolitan
-             2 Regional/rural  ")  # Add value labels 
-myVars <- c("age",  "fas_score", "dass_mean" , "pds_mean", "brs_mean", "ccas_mean", "gender", "education_recoded", "municipality" )
-catVars <- c("gender", "education_recoded", "municipality")
+#val_lab(climateData_AUS_2022$municipality) = num_lab("
+        #     1 Metropolitan
+         #    2 Regional/rural  ")  # Add value labels 
+
+myVars <- c("age",  "fas_score", "dass_mean" , "pds_mean", "brs_mean", "ccas_mean", "gender", "education_recoded", "municipality_recoded" )
+catVars <- c("gender", "education_recoded", "municipality_recoded")
 
 
 tab2 <- print(CreateTableOne(vars = myVars, data = climateData_AUS_2022, factorVars = catVars, ), showAllLevels = TRUE)
@@ -431,8 +465,8 @@ val_lab(climateData_HUN$gender) = num_lab("
  
 
 
-myVars <- c("age",  "fas_score", "dass_mean" , "pds_mean", "nrs_mean", "ccas_mean", "who_sum", "heas_mean", "brs_mean", "gender", "education_recoded", "occupation", "municipality" )
-catVars <- c("gender", "education_recoded", "occupation", "municipality")
+myVars <- c("age",  "fas_score", "dass_mean" , "pds_mean", "nrs_mean", "ccas_mean", "who_sum", "heas_mean", "brs_mean", "gender", "education_recoded", "occupation", "municipality_recoded" )
+catVars <- c("gender", "education_recoded", "occupation", "municipality_recoded")
 
 
 tab3 <- print(CreateTableOne(vars = myVars, data = climateData_HUN, factorVars = catVars, ), showAllLevels = TRUE)
@@ -481,9 +515,50 @@ The Municipalities data for Chile needs cleaning up.
 
 From the descriptives, we can see that the Chilean sample is younger, on average, and has more male participants. 
 
-It looks as if there are differences between countries on the DASS and CCAS - we will test that later. 
+It looks as if there are differences between countries on the CCAS - we will test that later. It also seems as if the Australian sample has somewhat lower scores on the Family Affluence Scale. The AUS2022 sample has participants divided into Metro and Rural/Regional instead of 3 categories, but I think the original dataset has more detail. There are also some differences in education and municipality (Chilean sample still needs to be recoded). 
 
 The crossover between countries with which scales have been collected is quite variable. 
 
 ## Scale reliability
 
+TBA
+
+## Differences between countries 
+
+### CCAS mean
+
+```{r CCAS differences plot, echo=FALSE}
+ccas_mean_plot <- ggplot(all_data, aes(x = country, y = ccas_mean, fill = 	country)) +
+  geom_rain(rain.side = 'l', alpha = .7) + scale_fill_brewer(palette = 'Set1', guide = 'none')+ylab('CCAS mean score') + theme_classic()
+
+ccas_mean_plot
+```
+
+
+```{r CCAS ANOVA, echo = FALSE, include = FALSE}
+
+## ANOVA for CCAS mean
+
+ccas_res<- aov_ez(id = "id", dv = "ccas_mean",
+              between = c("country"),
+              covariate = c("age_c"), factorize = FALSE,
+              data = all_data)
+
+
+means_ccas <- emmeans(ccas_res, "country", contr = "pairwise")
+ccas_res_f <- apa_print(ccas_res)
+tab5 <- as.data.frame(ccas_res_f$table)
+tab6 <- as.data.frame(means_ccas$contrasts)
+
+```
+
+```{r CCAS means, echo = FALSE}
+tab5 %>%
+  kable(caption = "ANOVA table for CCAS mean differences between countries, controlling for age") %>%
+  kable_styling()
+
+tab6 %>%
+  kable(caption = "Estimated marginal means contrast table for CCAS mean differences between countries, controlling for age. Tukey's method is used for multiple comparisons.") %>%
+  kable_styling()
+
+```
